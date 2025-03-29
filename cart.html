@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  
+    <title>Product Page</title>
+    <link rel="stylesheet" href="footer.css" type="text/css" media="all" />
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-direction: column; /* Stack vertically on small screens */
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 100%;
+            margin: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            position: relative;
+            width: 100%; /* Full width on small screens */
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 3px;
+            transition: opacity 0.3s ease-in-out;
+            border: darkslategrey solid;
+        }
+
+        .discount {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background: black;
+            color: white;
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 2px;
+        }
+
+        .image-thumbnails {
+            display: flex;
+            margin-top: 10px;
+            flex-wrap: wrap; /* Allow thumbnails to wrap on small screens */
+        }
+
+        .image-thumbnails img {
+            width: 50px;
+            margin-right: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 2px solid transparent;
+        }
+
+        .image-thumbnails img:hover,
+        .image-thumbnails img.active {
+            border: 2px solid darkslategray;
+        }
+
+        .product-details {
+            width: 100%; /* Full width on small screens */
+            padding-left: 0; /* Remove padding on small screens */
+            margin-top: 20px; /* Add space between image and details */
+        }
+
+        h1 {
+            color: #1a3d2c;
+            font-size: 24px; /* Adjust font size for small screens */
+        }
+
+        .rating {
+            color: darkslategrey;
+            font-size: 18px;
+        }
+
+        .price {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .discounted-price {
+            color: green;
+            font-weight: bold;
+        }
+
+        .description {
+            margin-top: 10px;
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif
+        }
+
+        .add-to-cart {
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 0px;
+            width: 100%; /* Full width on small screens */
+        }
+
+        .wishlist {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: red;
+            margin-top: 10px; /* Add space between buttons on small screens */
+        }
+        
+        .review{
+          color: #606491;
+          font-size: small;
+        }
+
+        .stock-info {
+            color: #505159;
+            font-weight: light;
+            margin: 10px 0;
+            background: lightgray;
+            border-radius: 3px;
+            width: 64%;
+            padding: 4px;
+            
+        }
+
+        .social-icons button {
+            background: lightgray;
+            border: none;
+            padding: 5px 10px;
+            margin-right: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-bottom: 5px; /* Add space between buttons on small screens */
+        }
+        
+    .benefits {
+        list-style: none; /* Remove default bullet points */
+        padding: 0;
+    }
+
+    .benefits li {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #555;
+        position: relative; /* For positioning the check mark */
+        padding-left: 30px; /* Space for the check mark */
+    }
+
+    .benefits li::before {
+        content: "\f058"; /* Font Awesome check-circle icon */
+        font-family: "Font Awesome 6 Free"; /* Font Awesome font family */
+        font-weight: 300; /* Required for solid icons */
+        color: lightslategrey; /* Green color for the check mark */
+        font-size: 18px; /* Icon size */
+        position: absolute;
+        left: 0; /* Align to the left */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical alignment */
+    }
+
+
+        /* Media Queries for Responsiveness */
+        @media (min-width: 768px) {
+            .product-container {
+                flex-direction: row; /* Side-by-side layout on larger screens */
+            }
+
+            .product-image {
+                width: 40%; /* Adjust image width for larger screens */
+            }
+
+            .product-details {
+                width: 60%; /* Adjust details width for larger screens */
+                padding-left: 20px; /* Restore padding on larger screens */
+                margin-top: 0; /* Remove margin on larger screens */
+            }
+
+            .add-to-cart {
+                width: auto; /* Auto width on larger screens */
+            }
+
+            .wishlist {
+                margin-top: 0; /* Remove margin on larger screens */
+            }
+
+            h1 {
+                font-size: 32px; /* Larger font size for larger screens */
+            }
+            .stock-info{
+            
+            }
+        }
+    </style>
+</head>
+<body>
+      <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="#" class="logo">
+          <img src="logo.jpg" alt="Blossom Haven Logo">
+          <span>Musyoka Haven</span>
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#About">About Us</a></li>
+          <li><a href="#Products">Our Products</a></li>
+          <li><a href="#more">Contact Us</a></li>
+          <li>
+        <a href="#" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span> <!-- Display cart item count -->
+        </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="product-container">
+        <div class="product-image">
+            <span class="discount">14% off</span>
+            <img id="mainImage" src="goldenpothos.jpg" alt="Golden Pothos">
+            <div class="image-thumbnails">
+                <img src="goldenpothos.jpg" alt="Golden Pothos" class="thumbnail active" onclick="changeContent(this, 'Golden Pothos', pothosDescription, 4.5, 59)">
+                <img src="snakeplant.jpg" alt="Snake Plant" class="thumbnail" onclick="changeContent(this, 'Snake Plant', snakePlantDescription, 4.7, 65)">
+                <img src="homalomena.jpg" alt="Homalomena" class="thumbnail" onclick="changeContent(this, 'Homalomena', homalomenaDescription, 4.2, 55)">
+                <img src="candelabra-aloe.jpg" alt="Candelabra Aloe" class="thumbnail" onclick="changeContent(this, 'Candelabra Aloe', candelabraAloeDescription, 4.8, 72)">
+            </div>
+        </div>
+        <div class="product-details">
+            <h1 id="plantName">Golden Pothos</h1>
+            <div class="rating" id="starRating">★★★★★ 4.5 <span class="review">(1 customer review)</span></div>
+            <p class="price">
+                <del id="oldPrice">$69</del> 
+                <span class="discounted-price" id="newPrice">$59</span>
+            </p>
+            
+            <p class="description" id="plantDescription"></p>
+
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist">♥️</button>
+
+            <p class="stock-info">🛒<strong>11</strong> people have added this product to their cart</p>
+            <p><strong>Brand:</strong> XTRA</p>
+            <p><strong>SKU:</strong> SKU_1422</p>
+            <p><strong>Tags:</strong> fabric, sofa</p>
+            <p><strong>Categories:</strong> Pothos</p>
+
+            <ul class="benefits">
+              ""
+                <li>Free shipping on all orders over $100</li>
+                <li>14 days easy refund & returns</li>
+                <li>Product taxes and customs duties included</li>
+            </ul>
+
+            <div class="social-icons">
+                <button>Facebook</button>
+                <button>Twitter</button>
+                <button>Pinterest</button>
+                <button>WhatsApp</button>
+                <button>Email</button>
+            </div>
+        </div>
+    </div>
+      <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="logo.jpg" alt="XTRA Flower Shop Logo">
+                <h2>XTRA</h2>
+                <p>FLOWER SHOP</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-info">
+                <div class="footer-column">
+                    <h3>CONTACT</h3>
+                    <p>info@xtraflower.com</p>
+                    <p>+1 (800) 345 - 678</p>
+                </div>
+                <div class="footer-column">
+                    <h3>ADDRESS</h3>
+                    <p>1079 Terry Lane, <br>Winter Park, Florida</p>
+                </div>
+                <div class="footer-column">
+                    <h3>WORKING HOURS</h3>
+                    <p>Mon-Fri: 9 AM - 6 PM</p>
+                    <p>Sat-Sun: 10 AM - 8 PM</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Descriptions for each plant
+        const pothosDescription = `
+            Golden Pothos is a beautiful, trailing vine that is perfect for indoor settings. 
+            Known for its air-purifying abilities, it helps in removing toxins such as formaldehyde and benzene.
+            This plant requires minimal care and can thrive in indirect sunlight, making it an ideal choice for beginners. 
+            Even if neglected, Golden Pothos recovers quickly, making it one of the most forgiving houseplants.
+            Additionally, it adds a fresh and vibrant touch to any space, improving both aesthetics and air quality.
+        `;
+
+        const snakePlantDescription = `
+            The Snake Plant, also called Sansevieria, is one of the easiest plants to maintain. 
+            It thrives in low-light conditions and requires very little water, making it perfect for busy individuals.
+            This plant is an excellent air purifier and is known for its ability to filter harmful toxins like formaldehyde and benzene.
+            One unique aspect of the Snake Plant is that it releases oxygen at night, improving indoor air quality and promoting better sleep.
+            With its tall, upright leaves featuring green and yellow patterns, it makes for an elegant addition to any home or office.
+        `;
+
+        const homalomenaDescription = `
+            Homalomena is a stunning tropical plant that features broad, glossy leaves, making it an eye-catching indoor plant.
+            It is known for its ability to adapt to indoor conditions while maintaining its lush appearance.
+            Homalomena prefers warm, humid environments but can thrive in regular household settings with moderate watering.
+            It is commonly used in homes and offices due to its low maintenance and ability to remove indoor air pollutants.
+            This plant's rich green foliage adds a tropical vibe to any space, enhancing the overall ambiance of the room.
+        `;
+
+        const candelabraAloeDescription = `
+            The Candelabra Aloe is a unique succulent plant with thick, fleshy leaves that store water, making it drought-resistant.
+            This plant is an excellent choice for those looking for a low-maintenance yet striking indoor or outdoor plant.
+            It thrives in bright, direct sunlight and requires minimal watering, making it an easy-care plant for beginners.
+            The gel inside its leaves is well-known for its soothing properties, commonly used to treat burns, cuts, and other skin irritations.
+            With its striking form and bold appearance, the Candelabra Aloe adds a desert-like aesthetic to any garden or indoor setting.
+        `;
+
+        // Set initial description
+        document.getElementById("plantDescription").innerHTML = pothosDescription;
+
+        function changeContent(thumbnail, name, description, rating, price) {
+            document.getElementById("mainImage").src = thumbnail.src;
+            document.getElementById("plantName").textContent = name;
+            document.getElementById("plantDescription").innerHTML = description;
+
+            // Change star rating
+            let stars = "★".repeat(Math.floor(rating)) + (rating % 1 >= 0.5 ? "☆" : "");
+            document.getElementById("starRating").innerHTML = `${stars} ${rating.toFixed(1)} (1 customer review)`;
+
+            // Change price
+            document.getElementById("oldPrice").textContent = `$${(price + 10).toFixed(2)}`;
+            document.getElementById("newPrice").textContent = `$${price.toFixed(2)}`;
+
+            // Update active thumbnail
+            document.querySelectorAll(".thumbnail").forEach(img => img.classList.remove("active"));
+            thumbnail.classList.add("active");
+        }
+    </script>
+
+</body>
+</html>
